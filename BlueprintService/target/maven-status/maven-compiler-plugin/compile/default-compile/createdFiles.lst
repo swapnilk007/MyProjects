@@ -1,0 +1,2 @@
+org/redhat/blueprint/service/HelloWorldService.class
+org/redhat/blueprint/service/impl/HelloWorldServiceImpl.class

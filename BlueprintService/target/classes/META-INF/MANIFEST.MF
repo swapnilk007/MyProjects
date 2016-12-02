@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1480672083405
+Build-Jdk: 1.8.0_111
+Built-By: ?
+Bundle-Blueprint: OSGI-INF/blueprint/config.xml
+Bundle-ManifestVersion: 2
+Bundle-Name: BlueprintService
+Bundle-SymbolicName: org.redhat.BlueprintModule.BlueprintService
+Bundle-Version: 0.0.1.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Export-Package: org.redhat.blueprint.service;version="0.0.1"
+Export-Service: org.redhat.blueprint.service.HelloWorldService
+Import-Package: org.osgi.service.blueprint;version="[1.0.0,2.0.0)",org.r
+ edhat.blueprint.service
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.5))"
+Tool: Bnd-3.2.0.201605172007

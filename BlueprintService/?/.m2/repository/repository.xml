@@ -1,0 +1,37 @@
+<repository lastmodified='20161202031402.671'>
+  <resource id='org.redhat.BlueprintModule/0.0.1.SNAPSHOT' symbolicname='org.redhat.BlueprintModule' presentationname='BlueprintService' uri='?/.m2/repository/org/redhat/BlueprintModule/BlueprintModule/0.0.1-SNAPSHOT/BlueprintModule-0.0.1-SNAPSHOT.jar' version='0.0.1.SNAPSHOT'>
+    <size>4536</size>
+    <capability name='bundle'>
+      <p n='symbolicname' v='org.redhat.BlueprintModule'/>
+      <p n='presentationname' v='BlueprintService'/>
+      <p n='version' t='version' v='0.0.1.SNAPSHOT'/>
+      <p n='manifestversion' v='2'/>
+    </capability>
+    <capability name='service'>
+      <p n='service' v='HelloWorldService'/>
+    </capability>
+    <capability name='package'>
+      <p n='package' v='org.redhat.blueprint.service'/>
+      <p n='version' t='version' v='0.0.1'/>
+    </capability>
+    <require name='package' filter='(&amp;(package=org.osgi.service.blueprint)(version&gt;=1.0.0)(!(version&gt;=2.0.0)))' extend='false' multiple='false' optional='false'>Import package org.osgi.service.blueprint;version="[1.0.0,2.0.0)"</require>
+    <require name='package' filter='(&amp;(package=org.redhat.blueprint.service))' extend='false' multiple='false' optional='false'>Import package org.redhat.blueprint.service</require>
+  </resource>
+  <resource id='org.redhat.BlueprintModule.BlueprintService/0.0.1.SNAPSHOT' symbolicname='org.redhat.BlueprintModule.BlueprintService' presentationname='BlueprintService' uri='?/.m2/repository/org/redhat/BlueprintModule/BlueprintService/0.0.1-SNAPSHOT/BlueprintService-0.0.1-SNAPSHOT.jar' version='0.0.1.SNAPSHOT'>
+    <size>4354</size>
+    <capability name='bundle'>
+      <p n='symbolicname' v='org.redhat.BlueprintModule.BlueprintService'/>
+      <p n='presentationname' v='BlueprintService'/>
+      <p n='version' t='version' v='0.0.1.SNAPSHOT'/>
+      <p n='manifestversion' v='2'/>
+    </capability>
+    <capability name='service'>
+      <p n='service' v='org.redhat.blueprint.service.HelloWorldService'/>
+    </capability>
+    <capability name='package'>
+      <p n='package' v='org.redhat.service'/>
+      <p n='version' t='version' v='0.0.1'/>
+    </capability>
+    <require name='package' filter='(&amp;(package=org.osgi.service.blueprint)(version&gt;=1.0.0)(!(version&gt;=2.0.0)))' extend='false' multiple='false' optional='false'>Import package org.osgi.service.blueprint;version="[1.0.0,2.0.0)"</require>
+  </resource>
+</repository>
