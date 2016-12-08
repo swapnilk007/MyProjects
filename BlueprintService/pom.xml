@@ -5,7 +5,7 @@
 	<artifactId>BlueprintService</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>BlueprintService</name>
-	<packaging>bundle</packaging>
+	 <packaging>bundle</packaging>
 	<build>
 		<plugins>
 			<plugin>
