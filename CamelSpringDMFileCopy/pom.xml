@@ -5,7 +5,7 @@
   <groupId>org.redhat.com.CamelSpringDSL</groupId>
   <artifactId>CamelSpringDSL</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <packaging>bundle</packaging>
+   <packaging>bundle</packaging>
   <name>CamelSpringDSL</name>
 
   <pluginRepositories>
