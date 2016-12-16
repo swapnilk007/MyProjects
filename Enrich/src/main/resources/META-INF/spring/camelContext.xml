@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:camel="http://camel.apache.org/schema/spring" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+	<bean class="org.redhat.com.Transformers.ExampleAggregationStrategy"
+		id="aggregate" />
+	<bean class="org.redhat.com.Transformers.DataTransformer" id="enrichingData" />
+	<camelContext id="camelContext-76390880-9c45-4cd0-a3fc-9d9c45a8a653"
+		trace="false" xmlns="http://camel.apache.org/schema/spring">
+
+		<!-- Enrich component -->
+		<route>
+			<from id="_from1" uri="file:///home/skumbhar/Fuse/input" />
+			<enrich strategyRef="aggregate">
+				<constant>direct:resource</constant>
+			</enrich>
+			<to id="_to1" uri="file:///home/skumbhar/Fuse/output" />
+		</route>
+		<route>
+			<from id="_from1" uri="direct:resource" />
+			<bean ref="enrichingData" />
+		</route>
+
+		<!-- Poll Enrich component -->
+
+		<route>
+			<from id="_from1" uri="file:///home/skumbhar/Fuse/input" />
+			<pollEnrich timeout="5000" strategyRef="aggregate">
+				<constant>file:///home/skumbhar/Fuse?fileName=date.txt</constant>
+			</pollEnrich>
+			<to id="_to1" uri="file:///home/skumbhar/Fuse/output" />
+		</route>
+	</camelContext>
+</beans>
