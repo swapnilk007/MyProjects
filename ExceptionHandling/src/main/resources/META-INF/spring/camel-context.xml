@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:camel="http://camel.apache.org/schema/spring"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+    <bean class="org.apache.activemq.camel.component.ActiveMQComponent" id="activemq">
+        <property name="brokerURL" value="tcp://localhost:61616"/>
+        <property name="userName" value="admin"/>
+        <property name="password" value="admin"/>
+    </bean>
+    <bean class="org.redhat.com.processor.ProcessMessages" id="processor"/>
+    <camelContext id="camelContext-a53f7418-13b1-45aa-8b83-7169174b8b53"
+        trace="false" xmlns="http://camel.apache.org/schema/spring">
+        <!-- Error handler Ex -->
+        <!-- <errorHandler deadLetterUri="activemq:queue:DeadTestQueue" id="myErrorHandler" 
+			type="DeadLetterChannel" useOriginalMessage="true" /> <route errorHandlerRef="myErrorHandler" 
+			id="_route1"> <from id="_from1" uri="activemq:queue:TESTQUEUE" /> <log id="_log1" 
+			message="Moving file ${headers.CamelFileName}" /> <process id="_process1" 
+			ref="processor" /> <to id="_to1" uri="file:///home/skumbhar/Fuse/output1" 
+			/> </route> -->
+        <!-- onException Example -->
+        <!-- <onException> <exception>java.lang.Exception</exception> <redeliveryPolicy 
+			maximumRedeliveries="2" delay="5000" /> </onException> <route id="_route1"> 
+			<from id="_from1" uri="activemq:queue:TESTQUEUE" /> <log id="_log1" message="Moving 
+			file ${headers.CamelFileName}" /> <process id="_process1" ref="processor" 
+			/> <to id="_to1" uri="file:///home/skumbhar/Fuse/output1" /> </route> -->
+        <!-- doTry-Catch Ex -->
+        <route id="_route1">
+            <from id="_from1" uri="activemq:queue:TESTQUEUE"/>
+            <doTry id="_doTry1">
+                <log id="_log1" message="Moving file ${headers.CamelFileName}"/>
+                <process id="_process1" ref="processor"/>
+                <to id="_to1" uri="file:///home/skumbhar/Fuse/output1"/>
+                <doCatch id="_doCatch1">
+                    <exception>java.lang.Exception</exception>
+                    <log id="_log2" message="Message received in doCatch block>>>>>"/>
+                    <to id="_to2" uri="mock:error"/>
+                </doCatch>
+                <doFinally id="_doFinally1">
+                    <to id="_to3" uri="mock:finally"/>
+                </doFinally>
+            </doTry>
+        </route>
+        <!-- <route> <from uri="mock:error" /> <log id="_log2" message="Message 
+			received in error queue>>>>>>" /> </route> -->
+    </camelContext>
+</beans>
