@@ -1,0 +1,22 @@
+<blueprint xmlns:camel="http://camel.apache.org/schema/blueprint"
+	xmlns:camel-cxf="http://camel.apache.org/schema/blueprint/cxf"
+	xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0"
+	xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0" xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0"
+	default-activation="eager"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd">
+	<bean id="jpa" class="org.apache.camel.component.jpa.JpaComponent">
+		<jpa:unit unitname="billing" property="entityManagerFactory" />
+		<tx:transaction method="*" value="Required" />
+	</bean>
+	<bean id="processData" class="org.redhat.support.service.DataProvider"/>
+	<camelContext xmlns="http://camel.apache.org/schema/blueprint"
+		trace="false">
+		<route id="camel-route">
+			<from uri="file:/home/skumbhar/Fuse/input?noop=true" />
+			<process ref="processData"/>
+			<to uri="jpa:org.mrobson.example.camelhibernatejpa.datamodel.Person" />
+		</route>
+	</camelContext>
+</blueprint>
+
